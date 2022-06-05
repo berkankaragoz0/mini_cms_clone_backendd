@@ -1,4 +1,4 @@
-package com.example.mini_cms_clone_backend.Entity;
+package com.example.mini_cms_clone_backend.entity;
 
 import javax.persistence.*;
 

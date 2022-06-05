@@ -1,7 +1,6 @@
-package com.example.mini_cms_clone_backend.Repository;
+package com.example.mini_cms_clone_backend.repository;
 
-import com.example.mini_cms_clone_backend.Entity.ContentEntity;
-import com.example.mini_cms_clone_backend.Pojo.ContentPojo;
+import com.example.mini_cms_clone_backend.entity.ContentEntity;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

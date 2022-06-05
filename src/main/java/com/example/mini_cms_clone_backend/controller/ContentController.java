@@ -1,7 +1,7 @@
-package com.example.mini_cms_clone_backend.Controller;
+package com.example.mini_cms_clone_backend.controller;
 
-import com.example.mini_cms_clone_backend.Pojo.ContentPojo;
-import com.example.mini_cms_clone_backend.Service.ContentServices;
+import com.example.mini_cms_clone_backend.pojo.ContentPojo;
+import com.example.mini_cms_clone_backend.service.implementation.ContentServices;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
