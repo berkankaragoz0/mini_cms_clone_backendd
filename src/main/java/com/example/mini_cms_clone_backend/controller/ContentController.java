@@ -4,10 +4,7 @@ import com.example.mini_cms_clone_backend.pojo.ContentPojo;
 import com.example.mini_cms_clone_backend.service.implementation.ContentServices;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,4 +20,16 @@ public class ContentController{
     public ResponseEntity<List<ContentPojo>> allContentList() {
         return ResponseEntity.ok(contentServices.getAllContents());
     }
+
+    @PostMapping
+    public ResponseEntity<ContentPojo> addContents(@RequestBody ContentPojo contentPojo) {
+        return ResponseEntity.ok(contentServices.addContent(contentPojo));
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteContent(@PathVariable int id){
+        contentServices.deleteContent(id);
+    }
+
 }

@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class ContentEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "seq_contents", allocationSize = 1)
+    @GeneratedValue(generator = "seq_contents",strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
@@ -17,10 +18,10 @@ public class ContentEntity {
     @Column(name = "status", length = 50)
     private String status;
 
-    @Column(name = "posterurl", length = 255)
+    @Column(name = "posterUrl", length = 255)
     private String posterUrl;
 
-    @Column(name = "videourl", length = 255)
+    @Column(name = "videoUrl", length = 255)
     private String videoUrl;
 
     public ContentEntity() {
