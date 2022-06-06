@@ -27,8 +27,9 @@ public class LicenseEntity {
     private String end_time;
 
     @JsonIgnore
-    @ManyToMany(mappedBy="licenseEntitySet")
-    private Set<ContentEntity> contentEntitySet = new HashSet<>();
+    @ManyToMany(mappedBy="licenseEntities")
+    private List<ContentEntity> contentEntities;
+
     public LicenseEntity() {
     }
 
@@ -66,8 +67,12 @@ public class LicenseEntity {
         this.end_time = end_time;
     }
 
-    public Set<ContentEntity> getContentEntitySet() {
-        return contentEntitySet;
+    public List<ContentEntity> getContentEntities() {
+        return contentEntities;
+    }
+
+    public void setContentEntities(List<ContentEntity> contentEntities) {
+        this.contentEntities = contentEntities;
     }
 
 }

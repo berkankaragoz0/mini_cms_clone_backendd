@@ -1,5 +1,7 @@
 package com.example.mini_cms_clone_backend.entity;
 
+import com.example.mini_cms_clone_backend.pojo.LicensePojo;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
@@ -32,7 +34,7 @@ public class ContentEntity {
             name = "content_license",
             joinColumns = {@JoinColumn(name = "content_id", nullable = false, updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "license_id", nullable = false, updatable = false) })
-    Set<LicenseEntity> licenseEntitySet = new HashSet<>();
+    private List<LicenseEntity> licenseEntities;
 
     public ContentEntity() {
     }
@@ -81,16 +83,12 @@ public class ContentEntity {
         this.videourl = videourl;
     }
 
-    public Set<LicenseEntity> getLicenseEntitySet(){
-        return licenseEntitySet;
+    public List<LicenseEntity> getLicenseEntities() {
+        return licenseEntities;
     }
 
-    /*public List<LicenseEntity> getLicenses() {
-        return licenses;
+    public void setLicenseEntities(List<LicenseEntity> licenseEntities) {
+        this.licenseEntities = licenseEntities;
     }
-
-    public void setLicenses(List<LicenseEntity> licenses) {
-        this.licenses = licenses;
-    }*/
 
 }

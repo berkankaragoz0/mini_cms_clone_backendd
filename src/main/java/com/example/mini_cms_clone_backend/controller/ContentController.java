@@ -48,7 +48,7 @@ public class ContentController{
     ) {
         ContentEntity contentEntity = contentRepository.findById(contentId).get();
         LicenseEntity licenseEntity = licenseRepository.findById(licenseId).get();
-        contentEntity.getLicenseEntitySet().add(licenseEntity);
+        contentEntity.getLicenseEntities().add(licenseEntity);
         return contentRepository.save(contentEntity);
     }
 }
