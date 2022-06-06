@@ -18,9 +18,9 @@ public interface ContentRepository  extends CrudRepository<ContentEntity, Intege
     @Query(value = "select * from contents order by id desc", nativeQuery = true)
     List<ContentEntity> getAllContents();
 
-    @Transactional
+    /*@Transactional
     @Modifying
     @Query(value = "insert into content_licence values(:contentid, :licenseid)", nativeQuery = true)
-    Integer addLicenseToContent(@Param("licenseid") Integer licenseId, @Param("contentid") Integer contentId);
+    Integer addLicenseToContent(@Param("licenseid") Integer licenseId, @Param("contentid") Integer contentId);*/
 
 }

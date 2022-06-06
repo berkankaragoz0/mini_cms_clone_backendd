@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/contents")
+@RequestMapping("/content")
 @AllArgsConstructor
 public class ContentController{
 
@@ -50,5 +50,6 @@ public class ContentController{
         LicenseEntity licenseEntity = licenseRepository.findById(licenseId).get();
         contentEntity.getLicenseEntities().add(licenseEntity);
         return contentRepository.save(contentEntity);
+        //contentServices.addLicenseToContent(contentId,licenseId);
     }
 }

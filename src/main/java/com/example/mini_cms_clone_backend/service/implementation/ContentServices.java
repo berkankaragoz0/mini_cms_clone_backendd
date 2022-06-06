@@ -5,11 +5,13 @@ import com.example.mini_cms_clone_backend.entity.LicenseEntity;
 import com.example.mini_cms_clone_backend.pojo.ContentPojo;
 import com.example.mini_cms_clone_backend.pojo.LicensePojo;
 import com.example.mini_cms_clone_backend.repository.ContentRepository;
+import com.example.mini_cms_clone_backend.repository.LicenseRepository;
 import com.example.mini_cms_clone_backend.service.IContentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,8 @@ import java.util.List;
 public class ContentServices implements IContentService {
     @Autowired
     ContentRepository contentRepository;
+    @Autowired
+    LicenseRepository licenseRepository;
 
     @Override
     public List<ContentPojo> getAllContents() {
@@ -53,8 +57,12 @@ public class ContentServices implements IContentService {
     }
 
     @Override
-    public void addLicenseToContent(int contentId, int licenseId) {
-
-
+    @Transactional
+    public ContentEntity addLicenseToContent(int contentId, int licenseId) {
+        /*ContentEntity contentEntity = contentRepository.findById(contentId).get();
+        LicenseEntity licenseEntity = licenseRepository.findById(licenseId).get();
+        contentEntity.getLicenseEntities().add(licenseEntity);
+        return contentRepository.save(contentEntity);*/
+        return null;
     }
 }
