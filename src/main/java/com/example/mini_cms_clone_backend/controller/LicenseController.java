@@ -1,13 +1,11 @@
 package com.example.mini_cms_clone_backend.controller;
 
+import com.example.mini_cms_clone_backend.pojo.ContentPojo;
 import com.example.mini_cms_clone_backend.pojo.LicensePojo;
 import com.example.mini_cms_clone_backend.service.implementation.LicenseService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,4 +20,16 @@ public class LicenseController {
     public ResponseEntity<List<LicensePojo>> allLicenseList() {
         return ResponseEntity.ok(licenseService.getAllLicense());
     }
+
+    @PostMapping
+    public ResponseEntity<LicensePojo> addLicense(@RequestBody LicensePojo licensePojo) {
+        return ResponseEntity.ok(licenseService.addLicense(licensePojo));
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteLicense(@PathVariable int id){
+        licenseService.deleteLicense(id);
+    }
+
 }

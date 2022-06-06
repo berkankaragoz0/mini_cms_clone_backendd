@@ -32,4 +32,14 @@ public class LicenseService implements ILicenseService {
         });
         return licensePojos;
     }
+
+    @Override
+    public LicensePojo addLicense(LicensePojo licensePojo) {
+        return null;
+    }
+
+    @Override
+    public void deleteLicense(int id) {
+
+    }
 }

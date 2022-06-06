@@ -40,7 +40,7 @@ public class ContentServices implements IContentService {
         contentEntity.setStatus(contentPojo.getStatus());
         contentEntity.setPosterUrl(contentPojo.getPosterUrl());
         contentEntity.setVideoUrl(contentPojo.getVideoUrl());
-        final ContentEntity contentDb = contentRepository.save(contentEntity);
+        ContentEntity contentDb = contentRepository.save(contentEntity);
         contentPojo.setId(contentDb.getId());
         return contentPojo;
     }
