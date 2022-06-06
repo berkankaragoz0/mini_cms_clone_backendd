@@ -1,6 +1,9 @@
 package com.example.mini_cms_clone_backend.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "contents")
@@ -23,6 +26,13 @@ public class ContentEntity {
 
     @Column(name = "videourl", length = 255)
     private String videourl;
+
+    @ManyToMany(targetEntity = LicenseEntity.class, cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "content_license",
+            joinColumns = {@JoinColumn(name = "content_id", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "license_id", nullable = false, updatable = false) })
+    Set<LicenseEntity> licenseEntitySet = new HashSet<>();
 
     public ContentEntity() {
     }
@@ -70,5 +80,17 @@ public class ContentEntity {
     public void setVideourl(String videourl) {
         this.videourl = videourl;
     }
+
+    public Set<LicenseEntity> getLicenseEntitySet(){
+        return licenseEntitySet;
+    }
+
+    /*public List<LicenseEntity> getLicenses() {
+        return licenses;
+    }
+
+    public void setLicenses(List<LicenseEntity> licenses) {
+        this.licenses = licenses;
+    }*/
 
 }

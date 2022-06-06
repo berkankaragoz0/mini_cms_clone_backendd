@@ -1,8 +1,13 @@
 package com.example.mini_cms_clone_backend.controller;
 
+import com.example.mini_cms_clone_backend.entity.ContentEntity;
+import com.example.mini_cms_clone_backend.entity.LicenseEntity;
 import com.example.mini_cms_clone_backend.pojo.ContentPojo;
+import com.example.mini_cms_clone_backend.repository.ContentRepository;
+import com.example.mini_cms_clone_backend.repository.LicenseRepository;
 import com.example.mini_cms_clone_backend.service.implementation.ContentServices;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +19,10 @@ import java.util.List;
 public class ContentController{
 
     private final ContentServices contentServices;
+    @Autowired
+    ContentRepository contentRepository;
+    @Autowired
+    LicenseRepository licenseRepository;
 
     @RequestMapping(value = "/getall", method = RequestMethod.GET)
     @ResponseBody
@@ -32,4 +41,14 @@ public class ContentController{
         contentServices.deleteContent(id);
     }
 
+    @PutMapping("/{contentId}/{licenseId}")
+    ContentEntity addLicenseToContent(
+            @PathVariable int contentId,
+            @PathVariable int licenseId
+    ) {
+        ContentEntity contentEntity = contentRepository.findById(contentId).get();
+        LicenseEntity licenseEntity = licenseRepository.findById(licenseId).get();
+        contentEntity.getLicenseEntitySet().add(licenseEntity);
+        return contentRepository.save(contentEntity);
+    }
 }

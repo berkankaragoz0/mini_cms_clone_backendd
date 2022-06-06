@@ -1,7 +1,9 @@
 package com.example.mini_cms_clone_backend.service.implementation;
 
 import com.example.mini_cms_clone_backend.entity.ContentEntity;
+import com.example.mini_cms_clone_backend.entity.LicenseEntity;
 import com.example.mini_cms_clone_backend.pojo.ContentPojo;
+import com.example.mini_cms_clone_backend.pojo.LicensePojo;
 import com.example.mini_cms_clone_backend.repository.ContentRepository;
 import com.example.mini_cms_clone_backend.service.IContentService;
 import lombok.RequiredArgsConstructor;
@@ -48,5 +50,11 @@ public class ContentServices implements IContentService {
     @Override
     public void deleteContent(int id) {
         contentRepository.deleteById(id);
+    }
+
+    @Override
+    public void addLicenseToContent(int contentId, int licenseId) {
+
+
     }
 }

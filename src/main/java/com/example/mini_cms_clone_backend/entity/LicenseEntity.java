@@ -1,6 +1,11 @@
 package com.example.mini_cms_clone_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "licenses")
@@ -21,6 +26,9 @@ public class LicenseEntity {
     @Column(name = "end_time", length = 55)
     private String end_time;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy="licenseEntitySet")
+    private Set<ContentEntity> contentEntitySet = new HashSet<>();
     public LicenseEntity() {
     }
 
@@ -57,4 +65,9 @@ public class LicenseEntity {
     public void setEnd_time(String end_time) {
         this.end_time = end_time;
     }
+
+    public Set<ContentEntity> getContentEntitySet() {
+        return contentEntitySet;
+    }
+
 }
