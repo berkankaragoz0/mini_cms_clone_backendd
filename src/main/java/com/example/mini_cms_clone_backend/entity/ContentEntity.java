@@ -18,11 +18,11 @@ public class ContentEntity {
     @Column(name = "status", length = 50)
     private String status;
 
-    @Column(name = "posterUrl", length = 255)
-    private String posterUrl;
+    @Column(name = "postertrl", length = 255)
+    private String posterurl;
 
-    @Column(name = "videoUrl", length = 255)
-    private String videoUrl;
+    @Column(name = "videourl", length = 255)
+    private String videourl;
 
     public ContentEntity() {
     }
@@ -55,20 +55,20 @@ public class ContentEntity {
         this.status = status;
     }
 
-    public String getPosterUrl() {
-        return posterUrl;
+    public String getPosterurl() {
+        return posterurl;
     }
 
-    public void setPosterUrl(String posterUrl) {
-        this.posterUrl = posterUrl;
+    public void setPosterurl(String posterUrl) {
+        this.posterurl = posterurl;
     }
 
-    public String getVideoUrl() {
-        return videoUrl;
+    public String getVideourl() {
+        return videourl;
     }
 
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
+    public void setVideourl(String videourl) {
+        this.videourl = videourl;
     }
 
 }

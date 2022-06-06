@@ -26,8 +26,8 @@ public class ContentServices implements IContentService {
             contentDto.setId(it.getId());
             contentDto.setName(it.getName());
             contentDto.setStatus(it.getStatus());
-            contentDto.setPosterUrl(it.getPosterUrl());
-            contentDto.setVideoUrl(it.getVideoUrl());
+            contentDto.setPosterurl(it.getPosterurl());
+            contentDto.setVideourl(it.getVideourl());
             contentPojos.add(contentDto);
         });
         return contentPojos;
@@ -38,8 +38,8 @@ public class ContentServices implements IContentService {
         ContentEntity contentEntity = new ContentEntity();
         contentEntity.setName(contentPojo.getName());
         contentEntity.setStatus(contentPojo.getStatus());
-        contentEntity.setPosterUrl(contentPojo.getPosterUrl());
-        contentEntity.setVideoUrl(contentPojo.getVideoUrl());
+        contentEntity.setPosterurl(contentPojo.getPosterurl());
+        contentEntity.setVideourl(contentPojo.getVideourl());
         ContentEntity contentDb = contentRepository.save(contentEntity);
         contentPojo.setId(contentDb.getId());
         return contentPojo;

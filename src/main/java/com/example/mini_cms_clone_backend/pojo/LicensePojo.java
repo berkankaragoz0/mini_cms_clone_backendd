@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class LicensePojo {
     private int id;
     private String name;
-    private String startTime;
-    private String endTime;
+    private String starttime;
+    private String endtime;
 }

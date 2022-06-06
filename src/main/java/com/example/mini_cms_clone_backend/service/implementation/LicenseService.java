@@ -1,5 +1,6 @@
 package com.example.mini_cms_clone_backend.service.implementation;
 
+import com.example.mini_cms_clone_backend.entity.ContentEntity;
 import com.example.mini_cms_clone_backend.entity.LicenseEntity;
 import com.example.mini_cms_clone_backend.pojo.LicensePojo;
 import com.example.mini_cms_clone_backend.repository.LicenseRepository;
@@ -26,8 +27,8 @@ public class LicenseService implements ILicenseService {
             LicensePojo licenseDto =new LicensePojo();
             licenseDto.setId(it.getId());
             licenseDto.setName(it.getName());
-            licenseDto.setStartTime(it.getStartTime());
-            licenseDto.setEndTime(it.getEndTime());
+            licenseDto.setStarttime(it.getStarttime());
+            licenseDto.setEndtime(it.getEndtime());
             licensePojos.add(licenseDto);
         });
         return licensePojos;
@@ -35,11 +36,17 @@ public class LicenseService implements ILicenseService {
 
     @Override
     public LicensePojo addLicense(LicensePojo licensePojo) {
-        return null;
+        LicenseEntity licenseEntity = new LicenseEntity();
+        licenseEntity.setName(licensePojo.getName());
+        licenseEntity.setStarttime(licensePojo.getStarttime());
+        licenseEntity.setEndtime(licensePojo.getEndtime());
+        LicenseEntity licenseDb = licenseRepository.save(licenseEntity);
+        licensePojo.setId(licenseDb.getId());
+        return licensePojo;
     }
 
     @Override
     public void deleteLicense(int id) {
-
+        licenseRepository.deleteById(id);
     }
 }

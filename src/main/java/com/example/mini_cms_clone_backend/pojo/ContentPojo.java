@@ -13,6 +13,6 @@ public class ContentPojo {
     private int id;
     private String name;
     private String status;
-    private String posterUrl;
-    private String videoUrl;
+    private String posterurl;
+    private String videourl;
 }

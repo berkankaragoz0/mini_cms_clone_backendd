@@ -15,11 +15,11 @@ public class LicenseEntity {
     @Column(name = "name", length = 250,nullable = false)
     private String name;
 
-    @Column(name = "start_time", length = 55)
-    private String startTime;
+    @Column(name = "starttime", length = 55)
+    private String starttime;
 
-    @Column(name = "end_time", length = 55)
-    private String endTime;
+    @Column(name = "endtime", length = 55)
+    private String endtime;
 
     public LicenseEntity() {
     }
@@ -44,17 +44,17 @@ public class LicenseEntity {
         this.name = name;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getStarttime() {
+        return starttime;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setStarttime(String starttime) {
+        this.starttime = starttime;
     }
 
-    public String getEndTime() { return endTime; }
+    public String getEndtime() { return endtime; }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setEndtime(String endtime) {
+        this.endtime = endtime;
     }
 }
