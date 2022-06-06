@@ -27,8 +27,8 @@ public class LicenseService implements ILicenseService {
             LicensePojo licenseDto =new LicensePojo();
             licenseDto.setId(it.getId());
             licenseDto.setName(it.getName());
-            licenseDto.setStarttime(it.getStarttime());
-            licenseDto.setEndtime(it.getEndtime());
+            licenseDto.setStart_time(it.getStart_time());
+            licenseDto.setEnd_time(it.getEnd_time());
             licensePojos.add(licenseDto);
         });
         return licensePojos;
@@ -38,8 +38,8 @@ public class LicenseService implements ILicenseService {
     public LicensePojo addLicense(LicensePojo licensePojo) {
         LicenseEntity licenseEntity = new LicenseEntity();
         licenseEntity.setName(licensePojo.getName());
-        licenseEntity.setStarttime(licensePojo.getStarttime());
-        licenseEntity.setEndtime(licensePojo.getEndtime());
+        licenseEntity.setStart_time(licensePojo.getStart_time());
+        licenseEntity.setEnd_time(licensePojo.getEnd_time());
         LicenseEntity licenseDb = licenseRepository.save(licenseEntity);
         licensePojo.setId(licenseDb.getId());
         return licensePojo;

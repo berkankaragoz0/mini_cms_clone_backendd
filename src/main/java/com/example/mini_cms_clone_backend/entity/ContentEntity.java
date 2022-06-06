@@ -18,7 +18,7 @@ public class ContentEntity {
     @Column(name = "status", length = 50)
     private String status;
 
-    @Column(name = "postertrl", length = 255)
+    @Column(name = "posterurl", length = 255)
     private String posterurl;
 
     @Column(name = "videourl", length = 255)
@@ -59,7 +59,7 @@ public class ContentEntity {
         return posterurl;
     }
 
-    public void setPosterurl(String posterUrl) {
+    public void setPosterurl(String posterurl) {
         this.posterurl = posterurl;
     }
 
