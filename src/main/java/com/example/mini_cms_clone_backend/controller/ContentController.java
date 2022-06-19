@@ -1,11 +1,13 @@
 package com.example.mini_cms_clone_backend.controller;
 
+import com.example.mini_cms_clone_backend.constant.Status;
 import com.example.mini_cms_clone_backend.entity.Content;
 import com.example.mini_cms_clone_backend.entity.License;
 import com.example.mini_cms_clone_backend.pojo.ContentP;
 import com.example.mini_cms_clone_backend.repository.ContentRepository;
 import com.example.mini_cms_clone_backend.repository.LicenseRepository;
 import com.example.mini_cms_clone_backend.service.ContentService;
+import com.example.mini_cms_clone_backend.service.LicenseService;
 import com.example.mini_cms_clone_backend.service.implementation.ContentServicesImp;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,8 @@ import java.util.List;
 @AllArgsConstructor
 public class ContentController{
 
-    private final ContentServicesImp contentServicesImp;
     private final ContentService contentService;
+    private final LicenseService licenseService;
     @Autowired
     ContentRepository contentRepository;
     @Autowired
@@ -49,14 +51,14 @@ public class ContentController{
     }
 
     @PutMapping("/{contentId}/{licenseId}")
-    Content addLicenseToContent(
-            @PathVariable int contentId,
-            @PathVariable int licenseId
-    ) {
-        Content content = contentRepository.findById(contentId).get();
-        License license = licenseRepository.findById(licenseId).get();
-        content.getLicenseEntities().add(license);
-        return contentRepository.save(content);
-        //contentServices.addLicenseToContent(contentId,licenseId);
+    public ResponseEntity addLicenseToContent(@PathVariable int contentId, @PathVariable int licenseId) {
+        Content content = contentService.getById(contentId);
+        License license = licenseService.getById(licenseId);
+        contentService.addLicenseToContent(content, license);
+        return ResponseEntity.ok("Content ID : "+contentId+" | License ID : "+licenseId);
+    }
+    @DeleteMapping("/deletelicense/{contentId}/{licenseId}")
+    public void deleteLicenseToContent(@PathVariable int contentId, @PathVariable int licenseId) {
+        contentService.deleteLicenseToContent(contentId, licenseId);
     }
 }

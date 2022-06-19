@@ -1,5 +1,7 @@
 package com.example.mini_cms_clone_backend.entity;
 
+import com.example.mini_cms_clone_backend.constant.LicenseStatus;
+import com.example.mini_cms_clone_backend.constant.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -27,6 +29,9 @@ public class License {
     private Long startTime;
 
     private Long endTime;
+
+    @Enumerated(EnumType.STRING)
+    private LicenseStatus status;
 
     @JsonIgnore
     @ManyToMany(mappedBy="licenseEntities")

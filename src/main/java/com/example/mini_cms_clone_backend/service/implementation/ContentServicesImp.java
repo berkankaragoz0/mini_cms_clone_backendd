@@ -2,20 +2,25 @@ package com.example.mini_cms_clone_backend.service.implementation;
 
 import com.example.mini_cms_clone_backend.constant.Status;
 import com.example.mini_cms_clone_backend.entity.Content;
+import com.example.mini_cms_clone_backend.entity.License;
+import com.example.mini_cms_clone_backend.log.LogGenerator;
 import com.example.mini_cms_clone_backend.pojo.ContentP;
 import com.example.mini_cms_clone_backend.repository.ContentRepository;
 import com.example.mini_cms_clone_backend.repository.LicenseRepository;
 import com.example.mini_cms_clone_backend.service.ContentService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Log4j2
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class ContentServicesImp implements ContentService {
     @Autowired
     ContentRepository contentRepository;
@@ -47,7 +52,7 @@ public class ContentServicesImp implements ContentService {
     public ContentP addContent(ContentP contentP) {
         Content content = new Content();
         content.setName(contentP.getName());
-        content.setStatus(Status.InProgress);
+        content.setStatus(Status.NoActiveLicense);
         Content contentDb = contentRepository.save(content);
         contentP.setId(contentDb.getId());
         return contentP;
@@ -61,16 +66,33 @@ public class ContentServicesImp implements ContentService {
     @Override
     public void delete(Content content) {
         content.setStatus(Status.Deleted);
-        content = contentRepository.save(content);
+        contentRepository.save(content);
     }
 
     @Override
-    @Transactional
-    public Content addLicenseToContent(int contentId, int licenseId) {
-        /*ContentEntity contentEntity = contentRepository.findById(contentId).get();
-        LicenseEntity licenseEntity = licenseRepository.findById(licenseId).get();
-        contentEntity.getLicenseEntities().add(licenseEntity);
-        return contentRepository.save(contentEntity);*/
-        return null;
+    public void addLicenseToContent(Content content, License license) {
+        content.getLicenseEntities().add(license);
+        if(content.getStatus().toString() == "NoActiveLicense"){
+            if (license.getStatus().toString() == "ACTIVE"){
+                content.setStatus(Status.InProgress);
+            }
+        }
+        contentRepository.save(content);
+    }
+
+    @Override
+    public void deleteLicenseToContent(int contentId, int licenseId) {
+        contentRepository.deletedLicenseToContent(contentId,licenseId);
+        Boolean result = contentRepository.existsActiveLicense(contentId);
+
+        Content content = contentRepository.findOneById(contentId);
+
+        if (content.getStatus().toString() != "NoActiveLicense" || content.getStatus().toString() != "Deleted"){
+            if (result==false){
+                content.setStatus(Status.NoActiveLicense);
+                contentRepository.save(content);
+            }
+        }
+
     }
 }

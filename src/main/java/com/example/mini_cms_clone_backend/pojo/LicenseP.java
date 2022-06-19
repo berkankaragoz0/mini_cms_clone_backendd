@@ -1,5 +1,6 @@
 package com.example.mini_cms_clone_backend.pojo;
 
+import com.example.mini_cms_clone_backend.constant.LicenseStatus;
 import lombok.*;
 
 @Data
@@ -12,4 +13,5 @@ public class LicenseP {
     private String name;
     private Long startTime;
     private Long endTime;
+    private LicenseStatus status;
 }

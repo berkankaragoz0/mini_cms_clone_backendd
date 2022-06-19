@@ -4,5 +4,6 @@ public enum Status {
     InProgress,
     ReadyForPublish,
     Published,
+    NoActiveLicense,
     Deleted
 }
