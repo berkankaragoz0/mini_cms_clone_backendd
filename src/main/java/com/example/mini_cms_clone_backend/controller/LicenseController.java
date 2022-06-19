@@ -1,6 +1,7 @@
 package com.example.mini_cms_clone_backend.controller;
 
 import com.example.mini_cms_clone_backend.pojo.LicenseP;
+import com.example.mini_cms_clone_backend.service.LicenseService;
 import com.example.mini_cms_clone_backend.service.implementation.LicenseServiceImp;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -9,26 +10,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/licence")
+@RequestMapping("/license")
 @AllArgsConstructor
 public class LicenseController {
-    private final LicenseServiceImp licenseServiceImp;
+    private final LicenseService licenseService;
 
-    @RequestMapping(value = "/getall", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping
     public ResponseEntity<List<LicenseP>> allLicenseList() {
-        return ResponseEntity.ok(licenseServiceImp.getAllLicense());
+        return ResponseEntity.ok(licenseService.getAllLicense());
     }
 
     @PostMapping
     public ResponseEntity<LicenseP> addLicense(@RequestBody LicenseP licenseP) {
-        return ResponseEntity.ok(licenseServiceImp.addLicense(licenseP));
+        return ResponseEntity.ok(licenseService.addLicense(licenseP));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public void deleteLicense(@PathVariable int id){
-        licenseServiceImp.deleteLicense(id);
+        licenseService.deleteLicense(id);
     }
 
 }

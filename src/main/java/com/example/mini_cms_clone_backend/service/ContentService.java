@@ -6,8 +6,10 @@ import com.example.mini_cms_clone_backend.pojo.ContentP;
 import java.util.List;
 
 public interface ContentService {
+    Content getById(int id);
     List<ContentP> getAllContents();
     ContentP addContent(ContentP contentP);
     void deleteContent(int id);
+    void delete(Content content);
     Content addLicenseToContent(int contentId, int licenseId);
 }

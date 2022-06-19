@@ -1,12 +1,18 @@
 package com.example.mini_cms_clone_backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "licenses")
+@EqualsAndHashCode(of = {"id"})
+@ToString
 public class License {
 
     @Id
@@ -18,59 +24,12 @@ public class License {
     @Column(name = "name", length = 250,nullable = false)
     private String name;
 
-    @Column(name = "start_time", length = 55)
-    private String start_time;
+    private Long startTime;
 
-    @Column(name = "end_time", length = 55)
-    private String end_time;
+    private Long endTime;
 
     @JsonIgnore
     @ManyToMany(mappedBy="licenseEntities")
     private List<Content> contentEntities;
-
-    public License() {
-    }
-
-    public License(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getStart_time() {
-        return start_time;
-    }
-
-    public void setStart_time(String start_time) {
-        this.start_time = start_time;
-    }
-
-    public String getEnd_time() { return end_time; }
-
-    public void setEnd_time(String end_time) {
-        this.end_time = end_time;
-    }
-
-    public List<Content> getContentEntities() {
-        return contentEntities;
-    }
-
-    public void setContentEntities(List<Content> contentEntities) {
-        this.contentEntities = contentEntities;
-    }
 
 }

@@ -1,17 +1,15 @@
 package com.example.mini_cms_clone_backend.pojo;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(of = {"id"})
 public class LicenseP {
     private int id;
     private String name;
-    private String start_time;
-    private String end_time;
+    private Long startTime;
+    private Long endTime;
 }

@@ -5,6 +5,7 @@ import com.example.mini_cms_clone_backend.entity.License;
 import com.example.mini_cms_clone_backend.pojo.ContentP;
 import com.example.mini_cms_clone_backend.repository.ContentRepository;
 import com.example.mini_cms_clone_backend.repository.LicenseRepository;
+import com.example.mini_cms_clone_backend.service.ContentService;
 import com.example.mini_cms_clone_backend.service.implementation.ContentServicesImp;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,26 +20,32 @@ import java.util.List;
 public class ContentController{
 
     private final ContentServicesImp contentServicesImp;
+    private final ContentService contentService;
     @Autowired
     ContentRepository contentRepository;
     @Autowired
     LicenseRepository licenseRepository;
 
-    @RequestMapping(value = "/getall", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping
     public ResponseEntity<List<ContentP>> allContentList() {
-        return ResponseEntity.ok(contentServicesImp.getAllContents());
+        return ResponseEntity.ok(contentService.getAllContents());
     }
 
     @PostMapping
     public ResponseEntity<ContentP> addContents(@RequestBody ContentP contentP) {
-        return ResponseEntity.ok(contentServicesImp.addContent(contentP));
+        return ResponseEntity.ok(contentService.addContent(contentP));
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
+    @DeleteMapping("/{id}/delete")
     public void deleteContent(@PathVariable int id){
-        contentServicesImp.deleteContent(id);
+        contentService.deleteContent(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable int id){
+        Content content = contentService.getById(id);
+        contentService.delete(content);
+        return ResponseEntity.ok(id);
     }
 
     @PutMapping("/{contentId}/{licenseId}")

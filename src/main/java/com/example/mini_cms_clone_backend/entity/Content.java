@@ -1,10 +1,18 @@
 package com.example.mini_cms_clone_backend.entity;
 
+import com.example.mini_cms_clone_backend.constant.Status;
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "contents")
+@EqualsAndHashCode(of = {"id"})
+@ToString
 public class Content {
 
     @Id
@@ -16,14 +24,12 @@ public class Content {
     @Column(name = "name", length = 250,nullable = false)
     private String name;
 
-    @Column(name = "status", length = 50)
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
-    @Column(name = "posterurl", length = 255)
-    private String posterurl;
+    private String posterUrl;
 
-    @Column(name = "videourl", length = 255)
-    private String videourl;
+    private String videoUrl;
 
     @ManyToMany(targetEntity = License.class, cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinTable(
@@ -31,60 +37,5 @@ public class Content {
             joinColumns = {@JoinColumn(name = "content_id", nullable = false, updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "license_id", nullable = false, updatable = false) })
     private List<License> licenseEntities;
-
-    public Content() {
-    }
-
-    public Content(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getPosterurl() {
-        return posterurl;
-    }
-
-    public void setPosterurl(String posterurl) {
-        this.posterurl = posterurl;
-    }
-
-    public String getVideourl() {
-        return videourl;
-    }
-
-    public void setVideourl(String videourl) {
-        this.videourl = videourl;
-    }
-
-    public List<License> getLicenseEntities() {
-        return licenseEntities;
-    }
-
-    public void setLicenseEntities(List<License> licenseEntities) {
-        this.licenseEntities = licenseEntities;
-    }
 
 }

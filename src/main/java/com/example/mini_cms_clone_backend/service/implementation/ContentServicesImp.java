@@ -1,5 +1,6 @@
 package com.example.mini_cms_clone_backend.service.implementation;
 
+import com.example.mini_cms_clone_backend.constant.Status;
 import com.example.mini_cms_clone_backend.entity.Content;
 import com.example.mini_cms_clone_backend.pojo.ContentP;
 import com.example.mini_cms_clone_backend.repository.ContentRepository;
@@ -22,6 +23,11 @@ public class ContentServicesImp implements ContentService {
     LicenseRepository licenseRepository;
 
     @Override
+    public Content getById(int id) {
+        return contentRepository.findOneById(id);
+    }
+
+    @Override
     public List<ContentP> getAllContents() {
         List<Content> contentEntities = (List<Content>) contentRepository.findAll();
         List<ContentP> contentPS = new ArrayList<>();
@@ -30,8 +36,8 @@ public class ContentServicesImp implements ContentService {
             contentDto.setId(it.getId());
             contentDto.setName(it.getName());
             contentDto.setStatus(it.getStatus());
-            contentDto.setPosterurl(it.getPosterurl());
-            contentDto.setVideourl(it.getVideourl());
+            contentDto.setPosterUrl(it.getPosterUrl());
+            contentDto.setVideoUrl(it.getVideoUrl());
             contentPS.add(contentDto);
         });
         return contentPS;
@@ -41,9 +47,7 @@ public class ContentServicesImp implements ContentService {
     public ContentP addContent(ContentP contentP) {
         Content content = new Content();
         content.setName(contentP.getName());
-        content.setStatus(contentP.getStatus());
-        content.setPosterurl(contentP.getPosterurl());
-        content.setVideourl(contentP.getVideourl());
+        content.setStatus(Status.InProgress);
         Content contentDb = contentRepository.save(content);
         contentP.setId(contentDb.getId());
         return contentP;
@@ -52,6 +56,12 @@ public class ContentServicesImp implements ContentService {
     @Override
     public void deleteContent(int id) {
         contentRepository.deleteById(id);
+    }
+
+    @Override
+    public void delete(Content content) {
+        content.setStatus(Status.Deleted);
+        content = contentRepository.save(content);
     }
 
     @Override

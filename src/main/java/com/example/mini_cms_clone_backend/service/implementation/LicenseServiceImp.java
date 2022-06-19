@@ -26,8 +26,8 @@ public class LicenseServiceImp implements LicenseService {
             LicenseP licenseDto =new LicenseP();
             licenseDto.setId(it.getId());
             licenseDto.setName(it.getName());
-            licenseDto.setStart_time(it.getStart_time());
-            licenseDto.setEnd_time(it.getEnd_time());
+            licenseDto.setStartTime(it.getStartTime());
+            licenseDto.setEndTime(it.getEndTime());
             licensePS.add(licenseDto);
         });
         return licensePS;
@@ -37,8 +37,8 @@ public class LicenseServiceImp implements LicenseService {
     public LicenseP addLicense(LicenseP licenseP) {
         License license = new License();
         license.setName(licenseP.getName());
-        license.setStart_time(licenseP.getStart_time());
-        license.setEnd_time(licenseP.getEnd_time());
+        license.setStartTime(licenseP.getStartTime());
+        license.setEndTime(licenseP.getEndTime());
         License licenseDb = licenseRepository.save(license);
         licenseP.setId(licenseDb.getId());
         return licenseP;
