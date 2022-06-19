@@ -1,8 +1,7 @@
 package com.example.mini_cms_clone_backend.controller;
 
-import com.example.mini_cms_clone_backend.pojo.ContentPojo;
-import com.example.mini_cms_clone_backend.pojo.LicensePojo;
-import com.example.mini_cms_clone_backend.service.implementation.LicenseService;
+import com.example.mini_cms_clone_backend.pojo.LicenseP;
+import com.example.mini_cms_clone_backend.service.implementation.LicenseServiceImp;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,23 +12,23 @@ import java.util.List;
 @RequestMapping("/licence")
 @AllArgsConstructor
 public class LicenseController {
-    private final LicenseService licenseService;
+    private final LicenseServiceImp licenseServiceImp;
 
     @RequestMapping(value = "/getall", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<List<LicensePojo>> allLicenseList() {
-        return ResponseEntity.ok(licenseService.getAllLicense());
+    public ResponseEntity<List<LicenseP>> allLicenseList() {
+        return ResponseEntity.ok(licenseServiceImp.getAllLicense());
     }
 
     @PostMapping
-    public ResponseEntity<LicensePojo> addLicense(@RequestBody LicensePojo licensePojo) {
-        return ResponseEntity.ok(licenseService.addLicense(licensePojo));
+    public ResponseEntity<LicenseP> addLicense(@RequestBody LicenseP licenseP) {
+        return ResponseEntity.ok(licenseServiceImp.addLicense(licenseP));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public void deleteLicense(@PathVariable int id){
-        licenseService.deleteLicense(id);
+        licenseServiceImp.deleteLicense(id);
     }
 
 }

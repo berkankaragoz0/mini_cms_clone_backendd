@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LicensePojo {
+public class LicenseP {
     private int id;
     private String name;
     private String start_time;

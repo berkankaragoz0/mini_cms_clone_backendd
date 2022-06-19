@@ -1,11 +1,11 @@
 package com.example.mini_cms_clone_backend.controller;
 
-import com.example.mini_cms_clone_backend.entity.ContentEntity;
-import com.example.mini_cms_clone_backend.entity.LicenseEntity;
-import com.example.mini_cms_clone_backend.pojo.ContentPojo;
+import com.example.mini_cms_clone_backend.entity.Content;
+import com.example.mini_cms_clone_backend.entity.License;
+import com.example.mini_cms_clone_backend.pojo.ContentP;
 import com.example.mini_cms_clone_backend.repository.ContentRepository;
 import com.example.mini_cms_clone_backend.repository.LicenseRepository;
-import com.example.mini_cms_clone_backend.service.implementation.ContentServices;
+import com.example.mini_cms_clone_backend.service.implementation.ContentServicesImp;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ContentController{
 
-    private final ContentServices contentServices;
+    private final ContentServicesImp contentServicesImp;
     @Autowired
     ContentRepository contentRepository;
     @Autowired
@@ -26,30 +26,30 @@ public class ContentController{
 
     @RequestMapping(value = "/getall", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<List<ContentPojo>> allContentList() {
-        return ResponseEntity.ok(contentServices.getAllContents());
+    public ResponseEntity<List<ContentP>> allContentList() {
+        return ResponseEntity.ok(contentServicesImp.getAllContents());
     }
 
     @PostMapping
-    public ResponseEntity<ContentPojo> addContents(@RequestBody ContentPojo contentPojo) {
-        return ResponseEntity.ok(contentServices.addContent(contentPojo));
+    public ResponseEntity<ContentP> addContents(@RequestBody ContentP contentP) {
+        return ResponseEntity.ok(contentServicesImp.addContent(contentP));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public void deleteContent(@PathVariable int id){
-        contentServices.deleteContent(id);
+        contentServicesImp.deleteContent(id);
     }
 
     @PutMapping("/{contentId}/{licenseId}")
-    ContentEntity addLicenseToContent(
+    Content addLicenseToContent(
             @PathVariable int contentId,
             @PathVariable int licenseId
     ) {
-        ContentEntity contentEntity = contentRepository.findById(contentId).get();
-        LicenseEntity licenseEntity = licenseRepository.findById(licenseId).get();
-        contentEntity.getLicenseEntities().add(licenseEntity);
-        return contentRepository.save(contentEntity);
+        Content content = contentRepository.findById(contentId).get();
+        License license = licenseRepository.findById(licenseId).get();
+        content.getLicenseEntities().add(license);
+        return contentRepository.save(content);
         //contentServices.addLicenseToContent(contentId,licenseId);
     }
 }

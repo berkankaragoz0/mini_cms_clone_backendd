@@ -11,11 +11,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ContentPojo {
+public class ContentP {
     private int id;
     private String name;
     private String status;
     private String posterurl;
     private String videourl;
-    private List<LicensePojo> licenses;
+    private List<LicenseP> licenses;
 }

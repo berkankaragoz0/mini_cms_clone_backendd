@@ -1,15 +1,11 @@
 package com.example.mini_cms_clone_backend.entity;
 
-import com.example.mini_cms_clone_backend.pojo.LicensePojo;
-
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "contents")
-public class ContentEntity {
+public class Content {
 
     @Id
     @SequenceGenerator(name = "seq_contents", allocationSize = 1)
@@ -29,17 +25,17 @@ public class ContentEntity {
     @Column(name = "videourl", length = 255)
     private String videourl;
 
-    @ManyToMany(targetEntity = LicenseEntity.class, cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = License.class, cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinTable(
             name = "content_license",
             joinColumns = {@JoinColumn(name = "content_id", nullable = false, updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "license_id", nullable = false, updatable = false) })
-    private List<LicenseEntity> licenseEntities;
+    private List<License> licenseEntities;
 
-    public ContentEntity() {
+    public Content() {
     }
 
-    public ContentEntity(int id) {
+    public Content(int id) {
         this.id = id;
     }
 
@@ -83,11 +79,11 @@ public class ContentEntity {
         this.videourl = videourl;
     }
 
-    public List<LicenseEntity> getLicenseEntities() {
+    public List<License> getLicenseEntities() {
         return licenseEntities;
     }
 
-    public void setLicenseEntities(List<LicenseEntity> licenseEntities) {
+    public void setLicenseEntities(List<License> licenseEntities) {
         this.licenseEntities = licenseEntities;
     }
 

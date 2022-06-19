@@ -3,13 +3,11 @@ package com.example.mini_cms_clone_backend.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "licenses")
-public class LicenseEntity {
+public class License {
 
     @Id
     @SequenceGenerator(name = "seq_licenses", allocationSize = 1)
@@ -28,12 +26,12 @@ public class LicenseEntity {
 
     @JsonIgnore
     @ManyToMany(mappedBy="licenseEntities")
-    private List<ContentEntity> contentEntities;
+    private List<Content> contentEntities;
 
-    public LicenseEntity() {
+    public License() {
     }
 
-    public LicenseEntity(int id) {
+    public License(int id) {
         this.id = id;
     }
 
@@ -67,11 +65,11 @@ public class LicenseEntity {
         this.end_time = end_time;
     }
 
-    public List<ContentEntity> getContentEntities() {
+    public List<Content> getContentEntities() {
         return contentEntities;
     }
 
-    public void setContentEntities(List<ContentEntity> contentEntities) {
+    public void setContentEntities(List<Content> contentEntities) {
         this.contentEntities = contentEntities;
     }
 
